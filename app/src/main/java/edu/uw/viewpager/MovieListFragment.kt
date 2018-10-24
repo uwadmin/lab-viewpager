@@ -60,7 +60,7 @@ class MovieListFragment : Fragment() {
         val listView = rootView.findViewById<View>(R.id.list_view) as ListView
         listView.adapter = adapter
 
-        listView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+        listView.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
             val movie = parent.getItemAtPosition(position) as Movie
             Log.v(TAG, "You clicked on: $movie")
             callback!!.onMovieSelected(movie)
@@ -77,9 +77,9 @@ class MovieListFragment : Fragment() {
     }
 
     //download media information from iTunes
-    fun downloadMovieData(searchTerm: String) {
+    private fun downloadMovieData(searchTerm: String) {
 
-        var urlString = ""
+        val urlString: String
         try {
             urlString = "https://itunes.apple.com/search?term=" + URLEncoder.encode(searchTerm, "UTF-8") + "&media=movie&entity=movie&limit=25"
             //Log.v(TAG, urlString);
